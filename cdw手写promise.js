@@ -182,3 +182,10 @@ class MyPromise {
         })
     }
 }
+
+new Promise((res,rej) => {
+    res(1);
+    console.log(this.value)
+}).then(res => {
+    console.log(this.value)
+})
