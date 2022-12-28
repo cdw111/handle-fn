@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .clock {
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: 7px solid #000;
+        width: 500px;
+        height: 500px;
+        position: relative;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+
+      .line {
+        position: absolute;
+        left: 50%;
+        width: 7px;
+        height: 500px;
+        background-color: gray;
+        transform: translate(-50%);
+      }
+
+      .line:nth-of-type(2) {
+        /* 六条线，各旋转30度 */
+        transform: translate(-50%) rotate(30deg);
+      }
+
+      .line:nth-of-type(3) {
+        transform: translate(-50%) rotate(60deg);
+      }
+
+      .line:nth-of-type(4) {
+        transform: translate(-50%) rotate(90deg);
+      }
+
+      .line:nth-of-type(5) {
+        transform: translate(-50%) rotate(120deg);
+      }
+
+      .line:nth-of-type(6) {
+        transform: translate(-50%) rotate(150deg);
+      }
+
+      .mark {
+        width: 370px;
+        height: 370px;
+        background-color: #fff;
+        border-radius: 50%;
+        /* 将遮罩层绝对垂直居中到父元素里 */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .hour,
+      .minute,
+      .second {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -100%);
+        /* 设置时、分、秒针的旋转中心为底部 */
+        transform-origin: bottom;
+      }
+
+      .hour {
+        width: 10px;
+        height: 90px;
+        background-color: rgb(73, 6, 6);
+        /* 给时针设置匀速转动的动画效果 */
+        animation: rotate360 43200s linear infinite;
+      }
+
+      .minute {
+        width: 7px;
+        height: 110px;
+        background-color: rgb(71, 248, 55);
+        /* 给分针设置匀速转动的动画效果 */
+        animation: rotate360 3600s linear infinite;
+      }
+
+      .second {
+        width: 4px;
+        height: 130px;
+        background-color: rgb(145, 132, 255);
+        /* 给秒针设置60帧动画效果，1秒1帧，60s转完一圈 */
+        animation: rotate360 60s steps(60) infinite;
+      }
+
+      .dot {
+        width: 22px;
+        height: 22px;
+        background-color: #000;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes rotate360 {
+        /* 起始点是0秒（原样），此处可省略动画起点from */
+        to {
+          /* 避免translate被覆盖，此处可再添加translate */
+          transform: translate(-50%, -100%) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <!-- 白色遮罩层 -->
+      <div class="mark"></div>
+      <!-- 时、分、针进行动画效果 -->
+      <div class="hour"></div>
+      <div class="minute"></div>
+      <div class="second"></div>
+      <!-- 时钟正中的小圆点 -->
+      <div class="dot"></div>
+    </div>
+  </body>
+</html>
