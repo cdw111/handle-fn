@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @-webkit-keyframes opac {
+        from {
+          opacity: 1;
+          width: 0;
+          height: 0;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        to {
+          opacity: 0;
+          width: 500px;
+          height: 500px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .animate-wave * {
+        background: #c3e4ff;
+        position: absolute;
+        border-radius: 50%;
+        animation: opac 4s infinite;
+      }
+
+      .animate-wave .w2 {
+        animation-delay: 1s;
+      }
+
+      .animate-wave .w3 {
+        animation-delay: 2s;
+      }
+
+      .animate-wave .w4 {
+        animation-delay: 3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="animate-wave">
+      <div class="w1"></div>
+      <div class="w2"></div>
+      <div class="w3"></div>
+      <div class="w4"></div>
+    </div>
+  </body>
+</html>
