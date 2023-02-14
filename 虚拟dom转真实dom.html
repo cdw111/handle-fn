@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const data = {
+        tag: "DIV",
+        attrs: {
+          id: "asp",
+        },
+        children: [
+          {
+            tag: "SPAN",
+            children: [{ tag: "A", children: [] }],
+          },
+          {
+            tag: "SPAN",
+            children: [
+              { tag: "A", children: [] },
+              { tag: "A", children: [] },
+            ],
+          },
+        ],
+      };
+
+      const vtor = function (data) {
+        const container = document.createElement(data.tag);
+        for (let key in data.attrs) {
+          container.setAttribute(key, data.attrs[key]);
+        }
+        if (container.children) {
+          data.children.forEach((child) => {
+            container.appendChild(vtor(child));
+          });
+        }
+        return container;
+      };
+      const app = document.getElementById("app");
+      app.appendChild(vtor(data));
+    </script>
+  </body>
+</html>
