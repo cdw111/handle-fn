@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = [
+        {
+          id: 1,
+          text: "节点1",
+          parentId: 0, //这里用0表示为顶级节点
+        },
+        {
+          id: 2,
+          text: "节点1_1",
+          parentId: 1, //通过这个字段来确定子父级
+        },
+      ];
+
+      // 转成
+      // [
+      //   {
+      //     id: 1,
+      //     text: "节点1",
+      //     parentId: 0,
+      //     children: [
+      //       {
+      //         id: 2,
+      //         text: "节点1_1",
+      //         parentId: 1,
+      //       },
+      //     ],
+      //   },
+      // ];
+
+      function transform(arrs) {
+        const temp = {};
+        const res = [];
+        for (let arr of arrs) {
+          temp[arr.id] = arr;
+        }
+        for (let arr of arrs) {
+          if (temp[arr.parentId]) {
+            if (temp[arr.parentId].children) {
+              temp[arr.parentId].children.push(arr);
+            } else {
+              temp[arr.parentId].children = [arr];
+            }
+          } else {
+            res.push(arr);
+          }
+        }
+        return res;
+      }
+
+      console.log(transform(root));
+
+      const list = [
+        { id: 04, pid: 03 },
+        { id: 01, pid: null },
+        { id: 02, pid: null },
+        { id: 03, pid: 01 },
+        { id: 05, pid: 01 },
+        { id: 06, pid: 03 },
+        { id: 07, pid: 02 },
+        { id: 09, pid: 02 },
+        { id: 10, pid: 07 },
+      ];
+      function trans() {
+        const temp = {};
+        const res = [];
+        for (const l of list) {
+          temp[l.id] = l;
+        }
+        for (const l of list) {
+          if (l.pid) {
+            temp[l.pid].children
+              ? temp[l.pid].children.push(l)
+              : (temp[l.pid].children = [l]);
+          } else {
+            res.push(l);
+          }
+        }
+        return res;
+      }
+
+      console.log(trans(list));
+    </script>
+  </body>
+</html>
