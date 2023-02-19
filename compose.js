@@ -16,9 +16,9 @@ function fn3(x) {
   return x + 3;
 }
 function fn4(x) {
-  return x * 4;
+  return x + 4;
 }
-const a = compose_(fn1, fn2, fn3, fn4);
+const a = compose___(fn1, fn2, fn3, fn4);
 console.log(a(1)); // 1+4+3+2+1=11
 
 function compose_(...fn) {
@@ -39,4 +39,11 @@ function compose__(fns) {
       (...args) =>
         pre(cur(...args))
   );
+}
+
+function compose___(...fns) {
+  if (!fns.length) return () => {};
+  return fns.reduce((pre, cur) => {
+    return (...args) => pre(cur(...args));
+  });
 }
