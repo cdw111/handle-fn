@@ -15,9 +15,11 @@ async function foo(urls) {
   for (const url of urls) {
     promises.push(randomDelay(url));
   }
-  for (const p of promises) {
-    console.log(await p);
-  }
+  const res = await Promise.all(promises);
+  // for (const p of promises) {
+  //   console.log(await p);
+  // }
+  console.log(res);
   setTimeout(console.log, 0, `共用时${Date.now() - t0}ms`);
 }
 
