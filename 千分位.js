@@ -9,8 +9,8 @@ function trans(nums) {
   nums = "" + nums;
   let [fir, sec] = nums.split(".");
   fir = fir.replace(/(\d)(?=(\d{3})+$)/g, "$1,");
-  sec = sec.replace(/^(\d{3})+/, "$1,");
+  sec = sec.replace(/(\d{3})/g, "$1,");
   console.log(fir + "." + sec);
 }
 trans(13246465.5454654654);
-console.log(formatNumber(646132131.6465465));
+console.log(formatNumber(646132131.646546));
