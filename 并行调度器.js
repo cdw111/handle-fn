@@ -13,40 +13,33 @@
 // 1200ms时，4任务执行完毕，输出4
 class Scheduler {
   constructor(limit) {
-    this.limit = limit;
+    this.max = limit;
     this.cur = 0;
     this.queue = [];
   }
-
-  addTask(time, fn) {
-    const promiseCreator = () => {
-      return new Promise((res, rej) => {
-        setTimeout(() => {
-          console.log(fn);
-          res();
-        }, time);
-      });
-    };
-    this.queue.push(promiseCreator);
+  addTask(time, order) {
+    this.queue.push(
+      () =>
+        new Promise((res, rej) => {
+          setTimeout(() => {
+            console.log(order, time);
+            res(order);
+          }, time);
+        })
+    );
   }
 
   start() {
-    for (let i = 0; i < this.limit; i++) {
-      this.request();
+    for (let i = 0; i < this.queue.length; i++) {
+      if (this.cur === this.max) break;
+      this.cur++;
+      this.queue
+        .shift()()
+        .then((res) => {
+          this.cur--;
+          this.start();
+        });
     }
-  }
-
-  request() {
-    if (!this.queue || !this.queue.length || this.cur >= this.limit) {
-      return;
-    }
-    this.cur++;
-    this.queue
-      .shift()()
-      .then(() => {
-        this.cur--;
-        this.request();
-      });
   }
 }
 
@@ -59,3 +52,52 @@ addTask(500, "2");
 addTask(300, "3");
 addTask(400, "4");
 scheduler.start();
+
+// class Scheduler {
+//   constructor(limit) {
+//     this.limit = limit;
+//     this.cur = 0;
+//     this.queue = [];
+//   }
+
+//   addTask(time, fn) {
+//     const promiseCreator = () => {
+//       return new Promise((res, rej) => {
+//         setTimeout(() => {
+//           console.log(fn);
+//           res();
+//         }, time);
+//       });
+//     };
+//     this.queue.push(promiseCreator);
+//   }
+
+//   start() {
+//     for (let i = 0; i < this.limit; i++) {
+//       this.request();
+//     }
+//   }
+
+//   request() {
+//     if (!this.queue || !this.queue.length || this.cur >= this.limit) {
+//       return;
+//     }
+//     this.cur++;
+//     this.queue
+//       .shift()()
+//       .then(() => {
+//         this.cur--;
+//         this.request();
+//       });
+//   }
+// }
+
+// const scheduler = new Scheduler(2);
+// const addTask = (time, order) => {
+//   scheduler.addTask(time, order);
+// };
+// addTask(1000, "1");
+// addTask(500, "2");
+// addTask(300, "3");
+// addTask(400, "4");
+// scheduler.start();
