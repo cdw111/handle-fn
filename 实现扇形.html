@@ -21,6 +21,12 @@
         border-radius: 50%;
         border-top: 100px solid red;
       }
+      .box3 {
+        border: 100px solid transparent;
+        height: 0;
+        width: 0;
+        border-top: 500px solid red;
+      }
       .box2 {
         height: 0;
         /* width: 0; */
@@ -29,10 +35,77 @@
         border-bottom-color: red;
         /* border-left-color: red; */
       }
+      .box4 {
+        position: relative;
+        margin: 300px;
+        width: 200px;
+        height: 200px;
+
+        background-color: red;
+      }
+      .box4::after {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        left: 200px;
+        content: "";
+        border-top: 100px solid red;
+        border-left: 50px solid red;
+        border-bottom: 100px solid transparent;
+        border-right: 50px solid transparent;
+      }
+      .box4::before {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        right: 200px;
+        content: "";
+        border-bottom: 100px solid red;
+        border-right: 50px solid red;
+        border-top: 100px solid transparent;
+        border-left: 50px solid transparent;
+      }
+
+      .box5 {
+        position: relative;
+        margin: 300px;
+        width: 200px;
+        height: 200px;
+
+        background-color: pink;
+        transform: rotate(45deg);
+      }
+      .box5::after {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: -100px;
+        left: 0;
+        content: "";
+        display: block;
+        border-radius: 50%;
+        background-color: pink;
+      }
+      .box5::before {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 0;
+        right: 100px;
+        content: "";
+        display: block;
+        border-radius: 50%;
+        background-color: pink;
+      }
     </style>
   </head>
   <body>
     <div class="box1"></div>
+    <div class="box3"></div>
     <div class="box2"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
   </body>
 </html>
